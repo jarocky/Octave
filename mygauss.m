@@ -19,11 +19,16 @@ for x = 1:length(b)-1
 end
 B
 for x = 2:length(b)
-  for y = x:2
+  for y = x:-1:2
     w = B(y-1,x)/B(x,x);
     for offset = x:length(b)+1
       B(y-1,offset) = B(y-1,offset) - B(x,offset)*w;
     end
   end
 end
-result = B
+r = B(:, 4)
+for x = 1:length(b)
+  r(x) = r(x)/B(x,x);
+end
+B
+result = r
